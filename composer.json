@@ -3,6 +3,7 @@
     "description": "laravel 5 response cache",
     "type": "package",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "tianshuo feng",
