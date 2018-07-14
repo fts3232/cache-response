@@ -2,7 +2,7 @@
     "name": "fts/cache-response",
     "description": "laravel 5 response cache",
     "type": "package",
-    "license": "MIT",
+    "license": "MIT"
     "authors": [
         {
             "name": "tianshuo feng",
@@ -23,5 +23,6 @@
         "php": ">=5.4",
         "illuminate/filesystem": "~5.0",
         "symfony/http-foundation": "2.6 - 4"
-    }
+    },
+    "minimum-stability": "dev"
 }
