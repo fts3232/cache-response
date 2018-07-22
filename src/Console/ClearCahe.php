@@ -37,12 +37,16 @@ class ClearCache extends Command
         $cache = $this->laravel->make(Cache::class);
         $slugs = $this->argument('slug');
         //判断是否指定了特定的缓存页面和特定的目录，不是清空所有
-        foreach($slugs as $slug){
-            if (strpos($slug, '.html') !== false) {
-                $this->forget($cache, $slug);
-            } else {
-                $this->clear($cache, $slug);
+        if (!empty($slugs)) {
+            foreach ($slugs as $slug) {
+                if (strpos($slug, '.html') !== false) {
+                    $this->forget($cache, $slug);
+                } else {
+                    $this->clear($cache, $slug);
+                }
             }
+        } else {
+            $this->clear($cache, $slugs);
         }
     }
 
