@@ -154,7 +154,7 @@ class Cache
      */
     public function forget($slug)
     {
-        return $this->files->delete($this->getCachePath($slug . '.html'));
+        return $this->files->delete($this->getCachePath($slug));
     }
 
     /**

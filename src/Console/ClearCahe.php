@@ -18,7 +18,7 @@ class ClearCache extends Command
      *
      * @var string
      */
-    protected $signature = 'page-cache:clear {slug? : URL slug of page to delete}';
+    protected $signature = 'page-cache:clear {slug?* : URL slug of page to delete}';
 
     /**
      * 命令描述
@@ -35,12 +35,14 @@ class ClearCache extends Command
     public function handle()
     {
         $cache = $this->laravel->make(Cache::class);
-        $slug = $this->argument('slug');
+        $slugs = $this->argument('slug');
         //判断是否指定了特定的缓存页面和特定的目录，不是清空所有
-        if (strpos($slug, '.html') !== false) {
-            $this->forget($cache, $slug);
-        } else {
-            $this->clear($cache, $slug);
+        foreach($slugs as $slug){
+            if (strpos($slug, '.html') !== false) {
+                $this->forget($cache, $slug);
+            } else {
+                $this->clear($cache, $slug);
+            }
         }
     }
 
