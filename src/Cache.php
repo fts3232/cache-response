@@ -64,7 +64,7 @@ class Cache
         //写入文件
         $this->files->put(
             $this->join([$path, $file]),
-            $response->getContent(),
+            $response->getContent() . '<!-- cache at ' . date('Y-m-d H:i:s', time()) . ' -->',
             true
         );
     }
