@@ -19,7 +19,7 @@ class CacheResponse
     {
         //如果缓存文件存在，返回缓存
         if ($html = $this->cache->exists($request)) {
-            return $html;
+            return response($html);
         } else {
             $response = $next($request);
             //判断是否需要缓存
