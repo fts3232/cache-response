@@ -196,7 +196,7 @@ class Cache
      * @param Response $response 响应类
      * @return bool
      */
-    protected function shouldCache(Request $request, Response $response)
+    public function shouldCache(Request $request, Response $response)
     {
         //如果请求类型是get并且http code为200 生成缓存
         return $request->isMethod('GET') && $response->getStatusCode() == 200;
