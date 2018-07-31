@@ -57,9 +57,10 @@ class CreateCache extends Command
     {
         $routes = $this->laravel->routes->getRoutes();
         $return = array();
+
         foreach ($routes as $route) {
             $middleware = $route->action['middleware'];
-            if ((is_array($middleware) && in_array('cache', $middleware)) || $middleware == 'cache') {
+            if (empty($route->wheres) && ((is_array($middleware) && in_array('page-cache', $middleware)) || $middleware == 'page-cache')) {
                 $return[] = $route->uri;
             }
         }
