@@ -48,3 +48,15 @@
 `uri`:可选参数，指定要生成缓存的url
 
     php artisan page-cache:create uri
+# 配置参数
+    config/pageCache.php
+    
+* 是否自动失效:
+    
+        true|false
+    
+* 有效时间（分钟）:
+    
+        默认30分钟
+    
+* 缓存目录:

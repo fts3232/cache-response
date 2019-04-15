@@ -37,16 +37,16 @@ class Cache
     public function __construct(Filesystem $files)
     {
         $this->files = $files;
+        $this->setCachePath();
     }
 
     /**
      * 设置缓存目录
      *
-     * @param $path
      */
-    public function setCachePath($path)
+    public function setCachePath()
     {
-        $this->cachePath = rtrim($path, '\/');
+        $this->cachePath = config('pageCache.cachePath', null) ? rtrim(config('pageCache.cachePath'), '\/') : public_path('static');
     }
 
     /**
@@ -76,7 +76,7 @@ class Cache
      */
     public function getCachePath()
     {
-        $base = $this->cachePath ? $this->cachePath : public_path('static');
+        $base = $this->cachePath;
         if (is_null($base)) {
             throw new Exception('Cache path not set.');
         }
@@ -140,8 +140,25 @@ class Cache
         list($path, $file) = $this->getDirectoryAndFileNames($request);
         $fileName = $this->join([$path, $file]);
 
-        if ($this->files->exists($fileName)) {
+        if ($this->files->exists($fileName) && !$this->isExpired($fileName)) {
             return $this->files->get($fileName);
+        }
+        return false;
+    }
+
+    /**
+     * 判断缓存文件是否过期
+     *
+     * @param $fileName 要检查的文件名
+     * @return bool
+     */
+    public function isExpired($fileName)
+    {
+        if (config('pageCache.isAutoExpired')) {
+            $time = $this->files->lastModified($fileName);
+            $now = time();
+            $expire = config('pageCache.expire') * 60;
+            return $now - $time >= $expire;
         }
         return false;
     }

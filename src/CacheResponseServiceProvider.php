@@ -15,6 +15,14 @@ class CacheResponseServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
+    public function boot()
+    {
+        // 发布配置文件  run php artisan vendor:publish
+        $this->publishes([
+            __DIR__ . '/../config/pageCache.php' => config_path('pageCache.php')
+        ], 'config');
+    }
+
     public function register()
     {
         //添加清理缓存命令
