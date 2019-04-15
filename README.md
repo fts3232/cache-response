@@ -53,10 +53,12 @@
     
 * 是否自动失效:
     
-        true|false
+        isAutoExpired：true | false
     
 * 有效时间（分钟）:
     
-        默认30分钟
+        expire：默认30分钟
     
 * 缓存目录:
+
+        cachePath：path
